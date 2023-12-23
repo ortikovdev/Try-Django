@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+    <h1>Articles TITLES</h1>
+{% endblock %}
+
+{% block content %}
+<!--    <h1>Article titles</h1>-->
+    <div>
+        <form action="{% url 'article:list' %}" method="get">
+            <input type="search" autocomplete="off" placeholder="search there..." name="q">
+            <button type="submit">search</button>
+            <span>{{ object_list.count }} object(s) found</span>
+        </form>
+    </div>
+    <br>
+    <div>
+        <a href="{% url 'article:create' %}">Create content</a> /
+        <a href="{% url 'article:create_form' %}">Create via Django form</a>
+    </div>
+    <ul>
+        {% for object in object_list %}
+            <li>
+                <a href="{% url 'article:detail' object.slug %}">{{ object.title }} ({{ object.id}})</a>
+                <a href="{% url 'article:change_form' object.slug %}">Edit</a>
+                <a href="{% url 'article:delete' object.slug %}">Delete</a>
+<!--                <a href="{{ object.get_absolute_url }}">{{ object.title }} ({{ object.id}})</a>-->
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

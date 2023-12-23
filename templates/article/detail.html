@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>Article DETAIL</h1>
+{% endblock %}
+
+{% block content %}
+<!--    <h1>Article detail</h1>-->
+<img width="20%" src="{{ object.image.url }}" alt="">
+{% if object.image %}
+<div>
+    <span>
+        <a href="{% url 'article:list' %}">Articles</a>
+    </span>
+    <b>/</b>
+    <span>
+        Article deatail
+    </span>
+</div>
+{% endif %}
+    <h2>{{ object.title }}</h2>
+    <p>{{ object.content }}</p>
+    <p>{{ object.created_date }}</p>
+
+    <p>
+        <a href="{% url 'article:change_form' object.id %}">Edit</a>
+        <a href="{% url 'article:delete' object.id %}">Delete</a>
+    </p>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>Article DELETE</h1>
+{% endblock %}
+{% block content %}
+<div>
+    <span>
+        <a href="{% url 'article:list' %}">Articles</a>
+    </span>
+    <span>Article Delete</span>
+</div>
+<h2>Are u sure "{{object.title}}" ?</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+    <a href="{% url 'article:list' %}">No, Thanks</a>
+</form>
+{% endblock %}

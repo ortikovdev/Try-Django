@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>Article EDIT</h1>
+{% endblock %}
+
+{% block content %}
+
+<span>
+    <a href="{% url 'article:list' %}">Articles</a>
+  </span>
+  <span>Articles change</span>
+</div>
+<div>
+  <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{form.as_p}}
+  <pre>
+    <code>Modified Date {{ object.modified_date}}</code>
+    <code>Created Date {{ object.created_date}}</code>
+  </pre>
+    <button type="submit">Save</button>
+  </form>
+
+
+</div>
+
+{% endblock %}
