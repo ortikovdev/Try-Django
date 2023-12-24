@@ -23,12 +23,12 @@
                 <label for="inputPassword5" class="form-label">Password</label>
                 <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="password">
                 <div id="passwordHelpBlock" class="form-text">
-                  If you don't have an account <a href="">register</a> first
+                  If you don't have an account <a href="{% url 'auth:register' %}">register</a> first
                 </div>
             </div>
             <div class="d-grid gap-2">
               <button class="btn btn-primary" type="submit">Log in</button>
-              <button class="btn btn-secondary" type="button">Go home</button>
+              <a class="btn btn-secondary" href="/">Go home</a>
             </div>
         </form>
     </div>

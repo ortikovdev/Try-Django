@@ -6,11 +6,13 @@
     </div>
     <div class="d-flex">
         {% if request.user.is_authenticated %}
-            <span>{{ request.user.username }}</span>
+            <h4>{{ request.user.username }}/ </h4>
+        <a href="{% url 'auth:logout' %}" class="btn btn-outline-danger">Log out</a>
         {% else %}
             <a href='{% url "auth:login" %}' class="btn btn-primary">Login</a>
         {% endif %}
 <!--        <button type="button" class="btn btn-success">Success</button>-->
 <!--        <button type="button" class="btn btn-primary">Primary</button>-->
+
     </div>
 </nav>

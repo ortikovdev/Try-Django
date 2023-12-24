@@ -21,3 +21,15 @@ def login_view(request):
 
     }
     return render(request, 'auth/login.html', context=context)
+
+
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('auth:login')
+    return render(request, 'auth/logout.html')
+
+
+def register_view(request):
+
+    return render(request, 'auth/register.html')
