@@ -18,16 +18,19 @@
                     <label for="exampleFormControlInput1" class="form-label">Username</label>
 <!--                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Username" name="username">-->
                     {{ form.username }}
-                    {{ form.username.errors }}
+                    <div class="text-danger">{{ form.username.errors }}</div>
+<!--                    {{ form.username.help_text }}-->
                 </div>
 
                 <div class="mb-3">
                     <label for="inputPassword1" class="form-label">Password</label>
 <!--                    <input type="password" id="inputPassword1" class="form-control" aria-describedby="passwordHelpBlock" name="password1" placeholder="Password">-->
                     {{ form.password1 }}
+                    <div class="text-danger">{{ form.password1.errors }}</div>
                     <label for="inputPassword2" class="form-label">Confirm password</label>
 <!--                    <input type="password" id="inputPassword2" class="form-control" aria-describedby="passwordHelpBlock" name= "password2" placeholder="Cofirm password">-->
                     {{ form.password2 }}
+                    <div class="text-danger">{{ form.password2.errors }}</div>
                     <div id="passw ordHelpBlock" class="form-text">
                       If you have already an account <a href="{% url 'auth:login' %}">login</a> first
                     </div>

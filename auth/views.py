@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.core.exceptions import ObjectDoesNotExist
-from .forms import MyUserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import MyUserCreationForm, MyAuthenticationForm
 
 # Create your views here.
 
 
-def login_view(request):
+def _login_view(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -21,6 +22,20 @@ def login_view(request):
 
     }
     return render(request, 'auth/login.html', context=context)
+
+
+def login_view(request):
+    form = MyAuthenticationForm()
+    if request.method == "POST":
+        form = MyAuthenticationForm(request, request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('/')
+    context = {
+        "form": form,
+    }
+    return render(request, 'auth/login_form.html', context)
 
 
 def logout_view(request):
