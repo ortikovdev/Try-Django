@@ -4,6 +4,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import MyUserCreationForm, MyAuthenticationForm
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -31,6 +33,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
+            messages.success(request, f"Successfully logged in {user.username}")
             return redirect('/')
     context = {
         "form": form,
@@ -40,7 +43,9 @@ def login_view(request):
 
 def logout_view(request):
     if request.method == 'POST':
+        user = request.user
         logout(request)
+        messages.error(request, f"Successfully logged out {user.username}")
         return redirect('auth:login')
     return render(request, 'auth/logout.html')
 
