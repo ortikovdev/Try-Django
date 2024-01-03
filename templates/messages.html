@@ -1,11 +1,11 @@
 
 {% for message in messages %}
-
+{{message.tags}}
     {% if message.tags == "success" %}
-        <div class="alert alert-primary" role="alert">
+        <div class="alert alert-success" role="alert">
           {{ message }}
         </div>
-    {% elif message.tags == "danger" %}
+    {% elif message.tags == "error" %}
         <div class="alert alert-danger" role="alert">
           {{ message }}
         </div>
@@ -18,7 +18,7 @@
             {{ message }}
         </div>
     {% else %}
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-primary" role="alert">
             {{ message }}
         </div>
 
