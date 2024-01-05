@@ -21,6 +21,11 @@ class Recipe(models.Model):
         return self.title
 
 
+# class RecipeTags(models.Model):
+#     recipe = models.ForeignKey(Recipe)
+#     tag = models.ForeignKey(Recipe)
+#
+
 class Ingredient(models.Model):
     UNIT = (
         (0, "Kilogram"),
