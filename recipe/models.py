@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
 
 
 class Tag(models.Model):
@@ -12,6 +14,7 @@ class Tag(models.Model):
 class Recipe(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     title = models.CharField(max_length=221)
+    slug = models.SlugField(unique=True, editable=False, null=True)
     image = models.ImageField(upload_to='recipes/', null=True, blank=True)
     description = models.TextField()
     tags = models.ManyToManyField(Tag)
@@ -42,3 +45,11 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.title
 
+
+def recipe_pre_save(sender, instance, *args, **kwargs):
+    if instance.slug is None:
+        import random
+        instance.slug = slugify(instance.title + str(random.randint(1000, 9999)))
+
+
+pre_save.connect(recipe_pre_save, sender=Recipe)

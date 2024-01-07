@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+     Recipe detail
+{% endblock %}
+
+{% block header %}
+    <h1>Recipe Detail</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3 mt-5">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{ object.image.url }}" class="img-fluid rounded-start" alt="">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ object.title }}</h5>
+            <p class="card-text">{{ object.description }}</p>
+            <p class="card-text"><small class="text-body-secondary">{{ object.created_date }}</small></p>
+          </div>
+
+            {% if is_author %}
+            <div class="card-button p-3">
+                <a type="button" class="btn btn-secondary btn-lg">Edit</a>
+                <a type="button" class="btn btn-danger btn-lg">Delete</a>
+                <a type="button" class="btn btn-primary btn-lg">Add</a>
+            </div>
+            {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-4 mt-2">
+        {% for ingredient in ingredients %}
+
+        <div class="card col-sm-6 mb-3 mb-sm-0 mt-2">
+<!--          <h5 class="card-header">{{ ingredient.title }}</h5>-->
+          <div class="card-body">
+            <h5 class="card-title">{{ ingredient.title }}</h5>
+            <h6 class="card-title">Author: {{ object.author }}</h6>
+            <p class="card-text">{{ ingredient.quantity }} - {{ ingredient.get_unit_display }}</p>
+
+              {% if is_author %}
+              <a href="#" class="btn btn-secondary">Edit</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+              {% endif %}
+
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

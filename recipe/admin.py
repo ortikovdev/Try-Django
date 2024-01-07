@@ -27,7 +27,7 @@ class RecipeAdmin(admin.ModelAdmin):
     autocomplete_fields = ('author',)
     date_hierarchy = 'created_date'
     filter_horizontal = ('tags', )
-    readonly_fields = ('created_date',)
+    readonly_fields = ('slug', 'created_date',)
 
 
 @admin.register(Ingredient)
