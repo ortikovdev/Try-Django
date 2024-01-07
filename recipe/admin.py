@@ -22,7 +22,7 @@ class IngredientAdminTabluarInline(admin.TabularInline):
 class RecipeAdmin(admin.ModelAdmin):
     inlines = (IngredientAdminTabluarInline, )
     list_display = ('id', 'title', 'author', 'created_date')
-    search_fields = ('title', 'author__username')
+    search_fields = ('title', 'author_ _username')
     list_filter = ('created_date', )
     autocomplete_fields = ('author',)
     date_hierarchy = 'created_date'
