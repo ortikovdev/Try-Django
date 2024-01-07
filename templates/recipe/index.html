@@ -6,22 +6,33 @@
 
 
 {% block header %}
-    <h1>Recipes list</h1>
+    <h1>Recipes list <a href="{% url 'recipe:create' %}" class="btn btn-primary">+ Add recipe</a></h1>
 {% endblock %}
 
 
 {% block content %}
     <div class="row mt-5">
+        {% if object_list %}
         {% for object in object_list %}
-           <div class="col-md-3 mb-6 p-2">
+           <div class="card col-md-4 mb-6 p-2">
               <img src="{{ object.image.url }}" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">{{ object.title }}</h5>
                 <p class="card-text">{{ object.description }}</p>
-                <a href="{% url 'recipe:detail' object.slug %}" class="btn btn-primary">See more</a>
-                <p class="card-text"><small class="text-body-secondary">{{ object.created_date }}</small></p>
+                  <p class="card-text"><small class="text-body-secondary">{{ object.created_date }}</small></p>
+
+                  <p>
+                    {% for tag in object.tags.all %}
+                      <a href="?tag={{tag.title}}">#{{ tag.title }}</a>
+                    {% endfor %}
+                  </p>
+
+                  <a href="{% url 'recipe:detail' object.slug %}" class="btn btn-primary">See more</a>
               </div>
             </div>
         {% endfor %}
+        {% else %}
+            <h1 class="text-center">No recipes</h1>
+        {% endif %}
     </div>
 {% endblock %}
