@@ -29,3 +29,6 @@ class RecipeForm(forms.ModelForm):
             "id": "recipe_tags",
         })
 
+    def clean_data(self):
+        title = self.cleaned_data['title']
+        return title.capitalize()

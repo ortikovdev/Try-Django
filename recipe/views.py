@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 
 from .forms import RecipeForm
 from .models import Recipe, Tag, Ingredient
@@ -40,6 +41,12 @@ def recipe_detail(request, slug):
 
 def recipe_create(request):
     form = RecipeForm()
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, files=request.FILES)
+        if form.is_valid():
+            obj = form.save()
+            detail_url = reverse('recipe:detail', args=[obj.slug])
+            return redirect(detail_url)
     context = {
         "form": form,
     }
