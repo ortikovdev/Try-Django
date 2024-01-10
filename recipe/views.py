@@ -44,8 +44,9 @@ def recipe_create(request):
     if request.method == 'POST':
         form = RecipeForm(request.POST, files=request.FILES)
         if form.is_valid():
-            obj = form.save(commit=False)
-            obj.author.id = request.user.id
+            obj = form.save(commit=False, )
+            obj.author_id = request.user.id
+            obj.save()
             detail_url = reverse('recipe:detail', args=[obj.slug])
             return redirect(detail_url)
     context = {
