@@ -61,3 +61,17 @@ def register_view(request):
         "form": form
     }
     return render(request, 'auth/register.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
